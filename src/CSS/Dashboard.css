@@ -1,0 +1,67 @@
+:root {
+    --primary-color: rgb(55, 99, 180);
+}
+
+.sidebar ul {
+    list-style: none;
+    color: white;
+    margin: 1rem 0;
+}
+
+.sidebar ul li {
+    padding: 1rem 0;
+}
+
+.mainDashboard {
+    flex: 1;
+    padding: 2rem 2rem;
+    background-color: rgb(244, 242, 242);
+}
+
+.lead-list {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.lead-item {
+    background-color: #e1ecf7;
+    border: 1px solid lightgray;
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.filterBtns {
+    display: flex;
+    gap: 10px;
+}
+
+.filterBtn {
+    padding: 6px 12px;
+    margin: 5px;
+    border: 1px solid lightgray;
+    background-color: #e1ecf7;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.filterBtn.active {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+}
+
+.addBtn {
+    background-color: rgb(5, 165, 5);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.addBtn:hover {
+    background-color: green;
+}

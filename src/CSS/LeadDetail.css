@@ -1,0 +1,45 @@
+
+.leadDetails {
+    flex: 1;
+    padding: 2rem 2rem;
+    background-color: rgb(244, 242, 242);
+}
+
+
+.leadDetails p {
+    margin: 0.3rem 0;
+}
+
+.editBtn {
+    margin-top: 1rem;
+    padding: 0.5rem 1rem;
+    background-color: orange;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.comment {
+    border-bottom: 1px solid #ddd;
+    padding: 0.5rem 0;
+    box-sizing: border-box;
+}
+
+.addnewComment {
+    border: 1px solid lightgray;
+    border-radius: 6px;
+    width: 100%;
+    padding: 1rem;
+    box-sizing: border-box;
+}
+
+.submitBtn {
+    margin-top: 1rem;
+    padding: 0.5rem 1rem;
+    background-color: rgb(5, 165, 5);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
