@@ -1,11 +1,27 @@
+import { useEffect, useState } from "react";
 import SideBar from "../Components/Sidebar";
+import useLeadsContext from "../Context/useContext";
 import "../CSS/LeadDetail.css";
 import useFetch from "../useFetch";
-import { Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import Loader from "../Components/Loader";
 
 export default function LeadDetails() {
-  const { data, loading, error } = useFetch("http://localhost:3000/leads", []);
-  console.log(data);
+  const { id } = useParams();
+  const { leads, leadsLoading } = useLeadsContext();
+  const [leadData, setLeadData] = useState(null);
+
+  const { data, loading, error } = useFetch(
+    `https://anvaya-backend-two.vercel.app/leads/${id}/comments`,
+    []
+  );
+  console.log("data", data);
+  useEffect(() => {
+    if (leads) {
+      const leadDetail = leads.find((lead) => lead._id == id);
+      setLeadData(leadDetail);
+    }
+  }, [id, leads]);
 
   const comments = [
     {
@@ -20,7 +36,8 @@ export default function LeadDetails() {
     <div className="leadManagement">
       <header>
         <h2>
-          Lead Management: <span>Lead Name</span>
+          Lead Management{" "}
+          <span>{leadData?.name ? `: ${leadData?.name}` : null}</span>
         </h2>
       </header>
       <main className="mainContent">
@@ -28,41 +45,62 @@ export default function LeadDetails() {
           <SideBar showOnlyBackButton={true} />
         </div>
         <div className="leadDetails">
-          <section className="card">
-            <h3>Lead Details</h3>
-            <p>
-              Lead Name: <span>Lead Name</span>
-            </p>
-            <p>
-              Sales Agent: <span>Lead Name</span>
-            </p>
-            <p>
-              Lead Source: <span>Lead Name</span>
-            </p>
-            <p>
-              Lead Status: <span>Lead Name</span>
-            </p>
-            <p>
-              Priority: <span>Lead Name</span>
-            </p>
-            <p>
-              Time to Close: <span>Lead Name</span>
-            </p>
-            {/* Edit Lead Details Button */}
-            <button className="editBtn">Edit Lead Details</button>
-          </section>
+          {leadsLoading ? (
+            <Loader />
+          ) : (
+            <>
+              <section className="card">
+                <h3>Lead Details</h3>
+                {leadData ? (
+                  <>
+                    <p>
+                      Lead Name: <span>{leadData?.name}</span>
+                    </p>
+                    <p>
+                      Sales Agent: <span>{leadData?.salesAgent}</span>
+                    </p>
+                    <p>
+                      Lead Source: <span>{leadData?.source}</span>
+                    </p>
+                    <p>
+                      Lead Status: <span>{leadData?.status}</span>
+                    </p>
+                    <p>
+                      Priority: <span>{leadData?.priority}</span>
+                    </p>
+                    <p>
+                      Time to Close: <span>{leadData?.timeToClose} days</span>
+                    </p>
+                    <p>
+                      Tags: <span>{leadData?.tags.join(", ")}</span>
+                    </p>
 
-          <section className="card">
-            <h3>Comments Section</h3>
-            <p>Author: </p>
-            <p>Comment: </p>
-            <input
-              type="text"
-              className="addnewComment"
-              placeholder="Add New Comment...."
-            />
-            <button className="submitBtn">Submit Comment</button>
-          </section>
+                    <button className="editBtn">Edit Lead Details</button>
+                  </>
+                ) : (
+                  <div>No Lead Data Found</div>
+                )}
+              </section>
+
+              <section className="card">
+                <h3>Comments Section</h3>
+                {loading && <Loader />}
+                {data?.map((ele) => (
+                  <div>
+                    <p>Author: </p>
+                    <p>Comment: {ele.commentText}</p>
+                  </div>
+                ))}
+
+                <input
+                  type="text"
+                  className="addnewComment"
+                  placeholder="Add New Comment...."
+                />
+                <button className="submitBtn">Submit Comment</button>
+              </section>
+            </>
+          )}
         </div>
       </main>
     </div>

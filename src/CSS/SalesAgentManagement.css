@@ -1,0 +1,9 @@
+.agentListSection {
+    flex: 1;
+    padding: 2rem 2rem;
+    background-color: rgb(244, 242, 242);
+}
+
+.agentList {
+    margin-bottom: 0.5rem;
+}

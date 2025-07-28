@@ -20,6 +20,11 @@ header h2 {
     background-color: var(--primary-color);
 }
 
+.sidebar a {
+    text-decoration: none;
+    color: white;
+}
+
 .card {
     background-color: white;
     padding: 15px;

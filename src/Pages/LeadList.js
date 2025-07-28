@@ -4,7 +4,10 @@ import useFetch from "../useFetch";
 import SideBar from "../Components/Sidebar";
 
 export default function LeadList() {
-  const { data, loading, error } = useFetch("http://localhost:3000/leads", []);
+  const { data, loading, error } = useFetch(
+    "https://anvaya-backend-two.vercel.app/leads",
+    []
+  );
 
   return (
     <div>
