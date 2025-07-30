@@ -1,34 +1,38 @@
 import { useNavigate } from "react-router-dom";
 import NavBar from "../Components/Navbar";
 import SideBar from "../Components/Sidebar";
+import Loader from "../Components/Loader";
+import useLeadsContext from "../Context/useContext";
 import "../CSS/SalesAgentManagement.css";
-import useFetch from "../useFetch";
 
 function SalesAgentManagement() {
-  const { data, loading, error } = useFetch(
-    "https://anvaya-backend-two.vercel.app/agents",
-    []
-  );
+  const { agentsLoading, agents } = useLeadsContext();
 
   const navigate = useNavigate();
-  console.log(navigate);
 
   return (
     <div>
       <NavBar title="Sales Agent Management" />
-
-      <main className="mainContent">
+      <main className="main">
         <SideBar showOnlyBackButton={true} />
         <div className="agentListSection">
           <section className="card">
             <h3>Sales Agent List</h3>
-            {data.map((agent) => (
-              <div className="agentList">
-                Agent: {agent.name} - {agent.email}
+            {agentsLoading && <Loader />}
+            {agents.map((agent, i) => (
+              <div className="agentCard" key={agent._id || i}>
+                <div className="agentIndex">{i + 1}.</div>
+                <div className="agentDetails">
+                  <div className="agentName">{agent.name}</div>
+                  <div className="agentEmail">{agent.email}</div>
+                </div>
               </div>
             ))}
           </section>
-          <button className="addBtn" onClick={() => navigate("salesAgentForm")}>
+          <button
+            className="addBtn"
+            onClick={() => navigate("/salesAgentForm")}
+          >
             Add New Agent
           </button>
         </div>

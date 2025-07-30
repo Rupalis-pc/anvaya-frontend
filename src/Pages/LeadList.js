@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import "../CSS/LeadList.css";
 import useFetch from "../useFetch";
 import SideBar from "../Components/Sidebar";
@@ -14,9 +13,9 @@ export default function LeadList() {
       <header>
         <h2>Lead List</h2>
       </header>
-      <main className="mainContent">
+      <main className="main">
         <SideBar showOnlyBackButton={true} />
-        <div className="leadOverview">
+        <div className="content">
           <section className="card">
             <h3>Lead Overview</h3>
             {data.map((lead) => (

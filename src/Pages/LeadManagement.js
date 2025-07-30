@@ -5,8 +5,9 @@ import "../CSS/LeadDetail.css";
 import useFetch from "../useFetch";
 import { useParams } from "react-router-dom";
 import Loader from "../Components/Loader";
+import NavBar from "../Components/Navbar";
 
-export default function LeadDetails() {
+export default function LeadManagement() {
   const { id } = useParams();
   const { leads, leadsLoading } = useLeadsContext();
   const [leadData, setLeadData] = useState(null);
@@ -15,7 +16,7 @@ export default function LeadDetails() {
     `https://anvaya-backend-two.vercel.app/leads/${id}/comments`,
     []
   );
-  console.log("data", data);
+
   useEffect(() => {
     if (leads) {
       const leadDetail = leads.find((lead) => lead._id == id);
@@ -23,24 +24,12 @@ export default function LeadDetails() {
     }
   }, [id, leads]);
 
-  const comments = [
-    {
-      id: 1,
-      author: "John Doe",
-      date: "2025-07-25 10:30 AM",
-      text: "Reached out, waiting for response...",
-    },
-  ];
-
   return (
-    <div className="leadManagement">
-      <header>
-        <h2>
-          Lead Management{" "}
-          <span>{leadData?.name ? `: ${leadData?.name}` : null}</span>
-        </h2>
-      </header>
-      <main className="mainContent">
+    <div>
+      <NavBar
+        title={`Lead Management ${leadData?.name ? `: ${leadData?.name}` : ""}`}
+      />
+      <main className="main">
         <div className="sidebar">
           <SideBar showOnlyBackButton={true} />
         </div>

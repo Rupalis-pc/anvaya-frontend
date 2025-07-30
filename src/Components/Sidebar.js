@@ -15,7 +15,7 @@ function SideBar(props) {
     <div className="sidebar">
       <ul>
         <li>
-          <Link to="/">→ Leads</Link>
+          <Link to="/leadlist">→ Leads</Link>
         </li>
         <li>
           <Link to="/leadlist">→ Sales</Link>

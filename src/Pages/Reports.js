@@ -5,7 +5,6 @@ import SideBar from "../Components/Sidebar";
 import "../CSS/reports.css";
 
 function Reports() {
-  // Simple data
   const leadsClosedData = [
     { name: "Closed", value: 10 },
     { name: "Pipeline", value: 15 },
@@ -26,7 +25,7 @@ function Reports() {
   return (
     <div>
       <NavBar title="Anvaya CRM Reports" />
-      <div className="mainContent">
+      <div className="main">
         <SideBar showOnlyBackButton={true} />
 
         <div className="reportsSection">

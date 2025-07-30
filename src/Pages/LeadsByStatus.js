@@ -1,29 +1,23 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import "../CSS/Dashboard.css";
 import NavBar from "../Components/Navbar";
 import SideBar from "../Components/Sidebar";
+import useLeadsContext from "../Context/useContext";
 
-export default function LeadStatus() {
-  const navigate = useNavigate();
-
-  const leads = [
-    { id: 1, name: "Lead 1", status: "New" },
-    { id: 2, name: "Lead 2", status: "Contacted" },
-    { id: 3, name: "Lead 3", status: "Qualified" },
-  ];
-
-  const leadStatus = "New";
-  const filteredLeads = leads.filter((lead) => lead.status === leadStatus);
+export default function LeadsByStatus() {
+  const { status } = useParams();
+  const { leads, leadsLoading } = useLeadsContext();
+  const filteredLeads = leads.filter((lead) => lead.status === status);
 
   return (
     <div>
-      <NavBar title="Leads By Status" />
-      <main className="mainContent">
+      <NavBar title=" Lead List by Status" />
+      <main className="main">
         <SideBar showOnlyBackButton={true} />
-        <div className="mainDashboard">
+        <div className="content">
           <section className="card">
-            <h3>Status: {leadStatus}</h3>
+            <h3>Status: {status}</h3>
             <div className="lead-list">
               {filteredLeads.map((lead) => (
                 <span key={lead.id} className="lead-item">

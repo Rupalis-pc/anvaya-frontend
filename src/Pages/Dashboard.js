@@ -11,7 +11,7 @@ export default function Dashboard() {
   const navigate = useNavigate();
   const statusArr = ["All", "New", "Contacted", "Qualified"];
   const { leads, leadsLoading } = useLeadsContext();
-  console.log("leads", leadsLoading, leads);
+  console.log("leads", leads);
 
   const filteredLeads =
     filter === "All" ? leads : leads.filter((lead) => lead.status === filter);
@@ -19,9 +19,9 @@ export default function Dashboard() {
   return (
     <div>
       <NavBar title="Anvaya CRM Dashboard" />
-      <main className="mainContent">
+      <main className="main">
         <SideBar showOnlyBackButton={false} />
-        <div className="mainDashboard">
+        <div className="content">
           {leadsLoading ? (
             <Loader />
           ) : (
@@ -34,7 +34,7 @@ export default function Dashboard() {
                     <span
                       key={lead._id}
                       className="lead-item"
-                      onClick={() => navigate(`/leadsDetail/${lead._id}`)}
+                      onClick={() => navigate(`/lead/${lead._id}`)}
                     >
                       {lead.name} ({lead.status})
                     </span>
@@ -53,7 +53,9 @@ export default function Dashboard() {
                       ).length;
                       return (
                         <li key={status}>
-                          {status}: {count} Lead{count !== 1 ? "s" : ""}
+                          <Link className="statusLink" to={`/leads/${status}`}>
+                            {status}: {count} Lead{count !== 1 ? "s" : ""}
+                          </Link>
                         </li>
                       );
                     })}

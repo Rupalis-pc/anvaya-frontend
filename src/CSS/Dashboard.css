@@ -12,12 +12,6 @@
     padding: 1rem 0;
 }
 
-.mainDashboard {
-    flex: 1;
-    padding: 2rem 2rem;
-    background-color: rgb(244, 242, 242);
-}
-
 .lead-list {
     display: flex;
     gap: 10px;
@@ -30,6 +24,11 @@
     padding: 6px 12px;
     border-radius: 4px;
     font-size: 14px;
+}
+
+.statusLink {
+    text-decoration: none;
+    color: black;
 }
 
 .filterBtns {

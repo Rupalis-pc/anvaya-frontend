@@ -8,9 +8,11 @@ export default useLeadsContext;
 
 export function LeadsProvider({ children }) {
   const [leads, setLeads] = useState([]);
+  const [agents, setAgents] = useState([]);
   const [leadsLoading, setLeadsLoading] = useState(false);
-  // Fetch leads from backend on mount
-  useEffect(() => {
+  const [agentsLoading, setAgentsLoading] = useState(false);
+
+  function fetchAllLeads() {
     setLeadsLoading(true);
     fetch("https://anvaya-backend-two.vercel.app/leads")
       .then((res) => res.json())
@@ -21,6 +23,24 @@ export function LeadsProvider({ children }) {
       .finally(() => {
         setLeadsLoading(false);
       });
+  }
+
+  function fetchAllAgents() {
+    setAgentsLoading(true);
+    fetch("https://anvaya-backend-two.vercel.app/agents")
+      .then((res) => res.json())
+      .then((data) => {
+        setAgents(data);
+      })
+      .catch(() => setAgents([]))
+      .finally(() => {
+        setAgentsLoading(false);
+      });
+  }
+
+  useEffect(() => {
+    fetchAllAgents();
+    fetchAllLeads();
   }, []);
 
   return (
@@ -28,6 +48,9 @@ export function LeadsProvider({ children }) {
       value={{
         leads,
         leadsLoading,
+        agentsLoading,
+        agents,
+        fetchAllAgents,
       }}
     >
       {children}
