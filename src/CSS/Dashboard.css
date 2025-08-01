@@ -34,6 +34,7 @@
 .filterBtns {
     display: flex;
     gap: 10px;
+    flex-wrap: wrap;
 }
 
 .filterBtn {
@@ -64,3 +65,4 @@
 .addBtn:hover {
     background-color: green;
 }
+

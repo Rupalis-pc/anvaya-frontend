@@ -5,6 +5,7 @@ import useLeadsContext from "../Context/useContext";
 import NavBar from "../Components/Navbar";
 import SideBar from "../Components/Sidebar";
 import "../CSS/AddSalesAgent.css";
+import { API_ENDPOINT } from "../Common/helper";
 
 export default function AddSalesAgent() {
   const [email, setEmail] = useState("");
@@ -13,7 +14,7 @@ export default function AddSalesAgent() {
   const navigate = useNavigate();
 
   function handleCreateAgent() {
-    fetch("https://anvaya-backend-two.vercel.app/agents", {
+    fetch(`${API_ENDPOINT}/agents`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

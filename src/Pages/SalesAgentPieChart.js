@@ -2,27 +2,35 @@ import { Pie } from "react-chartjs-2";
 import useLeadsContext from "../Context/useContext";
 
 export default function SalesAgentPieChart() {
-  const { leads } = useLeadsContext();
-  const data = leads.reduce((acc, lead) => {
-    const agentName = lead.salesAgent?.name || "Unassigned";
-    acc[agentName] = (acc[agentName] || 0) + 1;
+  const { leads, agents } = useLeadsContext();
+  const closedLeads = leads.filter((lead) => lead.status === "Closed");
+
+  const closedLeadsCount = closedLeads.reduce((acc, lead) => {
+    const agentId = lead.salesAgent || "Unassigned";
+    acc[agentId] = (acc[agentId] || 0) + 1;
     return acc;
   }, {});
 
-  const labels = Object.keys(data);
-  const counts = Object.values(data);
+  console.log(closedLeadsCount);
+
+  const labels = Object.keys(closedLeadsCount).map((agentId) => {
+    const agent = agents.find((a) => a._id === agentId);
+    return agent ? agent.name : "Unassigned";
+  });
+
+  const counts = Object.values(closedLeadsCount);
 
   const backgroundColors = [
-    "#4caf50",
-    "#2196f3",
-    "#ff9800",
-    "#9c27b0",
-    "#f44336",
-    "#00bcd4",
-    "#8bc34a",
-    "#e91e63",
-    "#ffc107",
-    "#795548",
+    "lightgreen",
+    "skyblue",
+    "moccasin",
+    "plum",
+    "salmon",
+    "powderblue",
+    "palegreen",
+    "lightpink",
+    "lightgoldenrodyellow",
+    "wheat",
   ];
 
   const chartData = {

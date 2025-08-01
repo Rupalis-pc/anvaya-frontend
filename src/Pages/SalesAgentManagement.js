@@ -5,6 +5,7 @@ import SideBar from "../Components/Sidebar";
 import Loader from "../Components/Loader";
 import useLeadsContext from "../Context/useContext";
 import "../CSS/SalesAgentManagement.css";
+import { API_ENDPOINT } from "../Common/helper";
 
 function SalesAgentManagement(props) {
   const { agentsLoading, agents, fetchAllAgents } = useLeadsContext();
@@ -13,12 +14,9 @@ function SalesAgentManagement(props) {
 
   async function deleteAgent(id) {
     try {
-      const response = await fetch(
-        `https://anvaya-backend-two.vercel.app/agents/${id}`,
-        {
-          method: "DELETE",
-        }
-      );
+      const response = await fetch(`${API_ENDPOINT}/agents/${id}`, {
+        method: "DELETE",
+      });
 
       if (response.ok) {
         toast.success("Agent deleted successfully");

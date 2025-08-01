@@ -7,6 +7,7 @@ import useFetch from "../useFetch";
 import { useNavigate, useParams } from "react-router-dom";
 import Loader from "../Components/Loader";
 import NavBar from "../Components/Navbar";
+import { API_ENDPOINT } from "../Common/helper";
 
 export default function LeadManagement() {
   const { id } = useParams();
@@ -21,10 +22,7 @@ export default function LeadManagement() {
     loading,
     error,
     fetchData,
-  } = useFetch(
-    `https://anvaya-backend-two.vercel.app/leads/${id}/comments`,
-    []
-  );
+  } = useFetch(`${API_ENDPOINT}/leads/${id}/comments`, []);
   console.log("data", data);
   useEffect(() => {
     if (leads) {
@@ -39,7 +37,7 @@ export default function LeadManagement() {
       return;
     }
 
-    fetch(`https://anvaya-backend-two.vercel.app/leads/${id}/comments`, {
+    fetch(`${API_ENDPOINT}/leads/${id}/comments`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

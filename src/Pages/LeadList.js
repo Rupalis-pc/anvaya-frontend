@@ -5,6 +5,7 @@ import NavBar from "../Components/Navbar";
 import SideBar from "../Components/Sidebar";
 import useLeadsContext from "../Context/useContext";
 import "../CSS/LeadList.css";
+import { API_ENDPOINT } from "../Common/helper";
 
 export default function LeadList(props) {
   const { leads, leadsLoading, agents, fetchAllLeads } = useLeadsContext();
@@ -26,12 +27,9 @@ export default function LeadList(props) {
 
   async function deleteLead(id) {
     try {
-      const response = await fetch(
-        `https://anvaya-backend-two.vercel.app/leads/${id}`,
-        {
-          method: "DELETE",
-        }
-      );
+      const response = await fetch(`${API_ENDPOINT}/leads/${id}`, {
+        method: "DELETE",
+      });
       if (response.ok) {
         toast.success("Lead deleted successfully");
         fetchAllLeads();

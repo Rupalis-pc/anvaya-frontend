@@ -1,4 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
+import { API_ENDPOINT } from "../Common/helper";
 
 const LeadsContext = createContext();
 
@@ -14,10 +15,14 @@ export function LeadsProvider({ children }) {
 
   function fetchAllLeads() {
     setLeadsLoading(true);
-    fetch("https://anvaya-backend-two.vercel.app/leads")
+    fetch(`${API_ENDPOINT}/leads`)
       .then((res) => res.json())
       .then((data) => {
-        setLeads(data);
+        if (data.error) {
+          setLeads([]);
+        } else {
+          setLeads(data);
+        }
       })
       .catch(() => setLeads([]))
       .finally(() => {
@@ -27,10 +32,14 @@ export function LeadsProvider({ children }) {
 
   function fetchAllAgents() {
     setAgentsLoading(true);
-    fetch("https://anvaya-backend-two.vercel.app/agents")
+    fetch(`${API_ENDPOINT}/agents`)
       .then((res) => res.json())
       .then((data) => {
-        setAgents(data);
+        if (data.error) {
+          setAgents([]);
+        } else {
+          setAgents(data);
+        }
       })
       .catch(() => setAgents([]))
       .finally(() => {

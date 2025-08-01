@@ -15,7 +15,7 @@ export default function LeadsByStatusChart() {
       {
         label: "Leads by Status",
         data: Object.values(statusCounts),
-        backgroundColor: "#2196f3",
+        backgroundColor: "skyblue",
         borderRadius: 6,
       },
     ],

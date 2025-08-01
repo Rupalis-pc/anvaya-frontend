@@ -4,7 +4,12 @@ import { toast } from "react-toastify";
 import NavBar from "../Components/Navbar";
 import SideBar from "../Components/Sidebar";
 import useLeadsContext from "../Context/useContext";
-import { LEAD_STATUS, PRIORITIES, TAGS_LIST } from "../Common/helper";
+import {
+  API_ENDPOINT,
+  LEAD_STATUS,
+  PRIORITIES,
+  TAGS_LIST,
+} from "../Common/helper";
 import "../CSS/AddLeadForm.css";
 
 export default function AddLeadForm(props) {
@@ -70,8 +75,8 @@ export default function AddLeadForm(props) {
   function submitHandler(e) {
     e.preventDefault();
     const URL = isEdit
-      ? `https://anvaya-backend-two.vercel.app/leads/${id}`
-      : "https://anvaya-backend-two.vercel.app/leads";
+      ? `${API_ENDPOINT}/leads/${id}`
+      : `${API_ENDPOINT}/leads`;
 
     fetch(URL, {
       method: "POST",

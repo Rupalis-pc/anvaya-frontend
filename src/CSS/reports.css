@@ -1,7 +1,7 @@
 /* src/CSS/reports.css */
 
 .reportsSection {
-    display: grid;
+    flex: 1;
     grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
     gap: 2rem;
     padding: 2rem;

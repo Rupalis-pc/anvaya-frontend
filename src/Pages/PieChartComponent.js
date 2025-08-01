@@ -1,13 +1,14 @@
 import { Pie } from "react-chartjs-2";
 import useFetch from "../useFetch";
+import { API_ENDPOINT } from "../Common/helper";
 
 export default function PieChartComponent() {
   const { data: leadsClosed } = useFetch(
-    "https://anvaya-backend-two.vercel.app/report/last-week",
+    `${API_ENDPOINT}/report/last-week`,
     []
   );
   const { data: leadsInPipeline } = useFetch(
-    "https://anvaya-backend-two.vercel.app/report/pipeline",
+    `${API_ENDPOINT}/report/pipeline`,
     []
   );
 
@@ -20,8 +21,8 @@ export default function PieChartComponent() {
       {
         label: "Leads Overview",
         data: [closedCount, pipelineCount],
-        backgroundColor: ["#4caf50", "#2196f3"],
-        borderColor: ["#388e3c", "#1976d2"],
+        backgroundColor: ["lightgreen", "skyblue"],
+        borderColor: ["green", "blue"],
         borderWidth: 1,
       },
     ],
@@ -37,7 +38,7 @@ export default function PieChartComponent() {
   };
 
   return (
-    <div style={{ width: "400px", margin: "2rem auto" }}>
+    <div style={{ width: "400px" }}>
       <h2>Total Leads Closed and in Pipeline</h2>
       <Pie data={pieData} options={pieOptions} />
     </div>
