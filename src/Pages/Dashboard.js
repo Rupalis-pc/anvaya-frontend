@@ -9,7 +9,14 @@ import Loader from "../Components/Loader";
 export default function Dashboard() {
   const [filter, setFilter] = useState("All");
   const navigate = useNavigate();
-  const statusArr = ["All", "New", "Contacted", "Qualified"];
+  const statusArr = [
+    "All",
+    "New",
+    "Contacted",
+    "Qualified",
+    "Proposal Sent",
+    "Closed",
+  ];
   const { leads, leadsLoading } = useLeadsContext();
   console.log("leads", leads);
 

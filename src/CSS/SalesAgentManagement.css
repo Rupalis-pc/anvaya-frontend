@@ -60,12 +60,13 @@
 }
 
 .deleteBtn {
-    background: none;
     border: none;
-    font-size: 20px;
+    font-size: 15px;
     cursor: pointer;
-    color: #d11a2a;
-    padding: 5px;
+    color: white;
+    background-color: #d11a2a;
+    border-radius: 5px;
+    padding: 6px 7px;
 }
 
 .deleteBtn:hover {

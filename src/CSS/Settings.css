@@ -1,6 +1,5 @@
 .settings-container {
     padding: 1rem;
-    font-family: Arial, sans-serif;
 }
 
 .tabs {
@@ -12,24 +11,23 @@
 .tab {
     padding: 0.5rem 1rem;
     cursor: pointer;
-    background-color: #eee;
+    background-color: rgb(234, 228, 228);
     border: none;
     border-radius: 4px;
     font-weight: bold;
-    transition: background-color 0.3s ease;
 }
 
 .tab:hover {
-    background-color: #ddd;
+    background-color: lightgray;
 }
 
 .tab.active {
-    background-color: #007bff;
+    background-color: var(--primary-color);
     color: white;
 }
 
 .tab-content {
-    border-top: 1px solid #ccc;
+    border-top: 1px solid lightgray;
     padding-top: 1rem;
     font-size: 1.1rem;
 }

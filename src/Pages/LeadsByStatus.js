@@ -5,54 +5,51 @@ import NavBar from "../Components/Navbar";
 import SideBar from "../Components/Sidebar";
 import useLeadsContext from "../Context/useContext";
 import "../CSS/LeadsByStatus.css";
+import { PRIORITIES } from "../Common/helper";
 
 export default function LeadsByStatus() {
   const { status } = useParams();
   const { leads, leadsLoading, agents } = useLeadsContext();
+
   const [leadsByStatus, setLeadsByStatus] = useState([]);
   const [filteredLeads, setFilteredLeads] = useState([]);
 
   const navigate = useNavigate();
   const [agent, setAgent] = useState("All");
-  const [priority, setPriority] = useState(false);
+  const [priority, setPriority] = useState("Select");
   const [timeToClose, setTimeToClose] = useState(false);
 
-  const priorityOrder = ["High", "Medium", "Low"];
+  function filterAndSortLeads() {
+    if (!leadsLoading && leads.length > 0 && status !== undefined) {
+      const initialFiltered =
+        status === "All"
+          ? leads
+          : leads.filter((lead) => lead.status === status);
 
-  function filter() {
-    const filtered = filteredLeads.filter((lead) => {
-      const statusMatch = status === "All" || lead.status === status;
-      const agentMatch =
-        agent === "All" ||
-        agents.find((agent) => agent._id === lead.salesAgent)?.name === agent;
-      const priorityMatch = priority === "Select" || lead.priority === priority;
-      return statusMatch && priorityMatch && agentMatch;
-    });
+      const filtered = initialFiltered.filter((lead) => {
+        const agentMatch =
+          agent === "All" ||
+          agents.find((agentObj) => agentObj._id === lead.salesAgent)?.name ===
+            agent;
 
-    if (timeToClose) {
-      filtered.sort((a, b) => a.timeToClose - b.timeToClose);
+        const priorityMatch =
+          priority === "Select" || lead.priority === priority;
+
+        return agentMatch && priorityMatch;
+      });
+
+      const sorted = timeToClose
+        ? [...filtered].sort((a, b) => a.timeToClose - b.timeToClose)
+        : filtered;
+
+      setLeadsByStatus(initialFiltered);
+      setFilteredLeads(sorted);
     }
-
-    return filtered;
   }
 
   useEffect(() => {
-    const filteredLeads = leads.filter((lead) => lead.status === status);
-    setLeadsByStatus(filteredLeads);
-    setFilteredLeads(filteredLeads);
-  }, [leads.length]);
-
-  useEffect(() => {
-    const filtered = leadsByStatus.filter((lead) => {
-      const statusMatch = status === "All" || lead.status === status;
-      const agentMatch =
-        agent === "All" ||
-        agents.find((agent) => agent._id === lead.salesAgent)?.name === agent;
-      const priorityMatch = priority === "Select" || lead.priority === priority;
-      return statusMatch && priorityMatch && agentMatch;
-    });
-    setFilteredLeads(filtered);
-  }, [agent, priority]);
+    filterAndSortLeads();
+  }, [leads, leadsLoading, status, agent, priority, timeToClose, agents]);
 
   return (
     <div>
@@ -63,7 +60,9 @@ export default function LeadsByStatus() {
           <section className="card">
             <h3>Status: {status}</h3>
             <div className="lead-list">
-              {filteredLeads.length === 0 ? (
+              {leadsLoading ? (
+                <p>Loading leads...</p>
+              ) : filteredLeads.length === 0 ? (
                 <p>No leads found for this status.</p>
               ) : (
                 <div className="lead-card-main">
@@ -122,7 +121,7 @@ export default function LeadsByStatus() {
                   onChange={(e) => setPriority(e.target.value)}
                 >
                   <option>Select</option>
-                  {priorityOrder.map((status) => (
+                  {PRIORITIES.map((status) => (
                     <option key={status} value={status}>
                       {status}
                     </option>
@@ -138,11 +137,10 @@ export default function LeadsByStatus() {
                 <button
                   className="sortBtn"
                   onClick={() => {
-                    setTimeToClose(true);
-                    setPriority(false);
+                    setTimeToClose((prev) => !prev);
                   }}
                 >
-                  Time to Close
+                  {timeToClose ? "Unsort" : "Time to Close"}
                 </button>
               </div>
             </div>

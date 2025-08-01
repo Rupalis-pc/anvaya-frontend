@@ -20,7 +20,11 @@ export default function App() {
           <Route path="/lead/:id" element={<LeadManagement />} />
           <Route path="/leads/:status" element={<LeadsByStatus />} />
           <Route path="/leadList" element={<LeadList />} />
-          <Route path="/leadForm" element={<AddLeadForm />} />
+          <Route path="/leadForm" element={<AddLeadForm isEdit={false} />} />
+          <Route
+            path="/lead/edit/:id"
+            element={<AddLeadForm isEdit={true} />}
+          />
           <Route path="/salesAgentForm" element={<AddSalesAgent />} />
           <Route
             path="/salesAgentManagement"

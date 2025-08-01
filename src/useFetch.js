@@ -5,7 +5,7 @@ export default function useFetch(url, initialData) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  useEffect(() => {
+  const fetchData = () => {
     setLoading(true);
     fetch(url)
       .then((res) => res.json())
@@ -14,6 +14,11 @@ export default function useFetch(url, initialData) {
       })
       .catch((error) => setError(error.message))
       .finally(() => setLoading(false));
+  };
+
+  useEffect(() => {
+    fetchData();
   }, [url]);
-  return { data, loading, error };
+
+  return { data, loading, error, fetchData };
 }
