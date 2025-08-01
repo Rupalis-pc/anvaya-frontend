@@ -10,11 +10,24 @@ import { LeadsProvider } from "./Context/useContext.js";
 import LeadManagement from "./Pages/LeadManagement.js";
 import LeadsByStatus from "./Pages/LeadsByStatus.js";
 import Settings from "./Pages/Settings.js";
+import { ToastContainer } from "react-toastify";
 
 export default function App() {
   return (
     <LeadsProvider>
       <Router>
+        <ToastContainer
+          position="top-right"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick={false}
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="light"
+        />
         <Routes>
           <Route path="/" element={<Dashboard />} />
           <Route path="/lead/:id" element={<LeadManagement />} />

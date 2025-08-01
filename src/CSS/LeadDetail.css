@@ -43,3 +43,8 @@
     border-radius: 5px;
     cursor: pointer;
 }
+
+.selectAuthor {
+    margin-top: 12px;
+    margin-bottom: 12px;
+}

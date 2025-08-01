@@ -1,9 +1,10 @@
-import "../CSS/LeadList.css";
+import { useState } from "react";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 import NavBar from "../Components/Navbar";
 import SideBar from "../Components/Sidebar";
 import useLeadsContext from "../Context/useContext";
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import "../CSS/LeadList.css";
 
 export default function LeadList(props) {
   const { leads, leadsLoading, agents, fetchAllLeads } = useLeadsContext();
@@ -31,11 +32,14 @@ export default function LeadList(props) {
           method: "DELETE",
         }
       );
-      if (response) {
+      if (response.ok) {
+        toast.success("Lead deleted successfully");
         fetchAllLeads();
+      } else {
+        toast.error("Failed to delete lead");
       }
     } catch (error) {
-      alert("Something went wrong. Please try again.");
+      toast.error("Something went wrong. Please try again.");
     }
   }
 

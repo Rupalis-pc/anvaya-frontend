@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 import SideBar from "../Components/Sidebar";
 import useLeadsContext from "../Context/useContext";
 import "../CSS/LeadDetail.css";
@@ -11,44 +12,57 @@ export default function LeadManagement() {
   const { id } = useParams();
   const { leads, leadsLoading, agents } = useLeadsContext();
   const [leadData, setLeadData] = useState(null);
-  const [agentName, setAgentName] = useState(null);
   const [commentText, setCommentText] = useState("");
+  const [selectedAuthor, setSelectedAuthor] = useState("");
 
   const navigate = useNavigate();
-  const { data, loading, error, fetchData } = useFetch(
+  const {
+    data = [],
+    loading,
+    error,
+    fetchData,
+  } = useFetch(
     `https://anvaya-backend-two.vercel.app/leads/${id}/comments`,
     []
   );
-
+  console.log("data", data);
   useEffect(() => {
     if (leads) {
       const leadDetail = leads.find((lead) => lead._id == id);
       setLeadData(leadDetail);
-      const agent = agents?.find(
-        (agent) => agent._id === leadDetail.salesAgent
-      )?.name;
-      setAgentName(agent || "");
     }
   }, [id, leads, agents]);
 
-  // /leads/:id/comments
   function handleSubmitComment() {
+    if (!selectedAuthor || !commentText.trim()) {
+      toast.error("Please select an author and write a comment.");
+      return;
+    }
+
     fetch(`https://anvaya-backend-two.vercel.app/leads/${id}/comments`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
+        lead: id,
+        author: selectedAuthor,
         commentText,
-        author: leadData.salesAgent,
       }),
     })
-      .then((res) => res.json())
+      .then((res) => {
+        if (!res.ok) throw new Error("Failed to submit comment");
+        return res.json();
+      })
       .then(() => {
         fetchData();
         setCommentText("");
+        toast.success("Comment added successfully!");
       })
-      .catch((err) => console.error("Failed to add product to Cart", err));
+      .catch((err) => {
+        console.error("Error submitting comment:", err);
+        toast.error("Failed to submit comment. Please try again.");
+      });
   }
 
   return (
@@ -73,7 +87,12 @@ export default function LeadManagement() {
                       Lead Name: <span>{leadData?.name}</span>
                     </p>
                     <p>
-                      Sales Agent: <span>{agentName || ""}</span>
+                      Sales Agent:{" "}
+                      <span>
+                        {agents?.find(
+                          (agent) => agent._id === leadData.salesAgent
+                        )?.name || ""}
+                      </span>
                     </p>
                     <p>
                       Lead Source: <span>{leadData?.source}</span>
@@ -108,10 +127,31 @@ export default function LeadManagement() {
                 {loading && <Loader />}
                 {data?.map((ele) => (
                   <div>
-                    <p>Author: {agentName}</p>
+                    <p>
+                      Author:{" "}
+                      {agents?.find((agent) => agent._id === ele.author)
+                        ?.name || ""}
+                    </p>
                     <p>Comment: {ele.commentText}</p>
                   </div>
                 ))}
+                <br />
+                <hr />
+                <label>
+                  Select Author:
+                  <select
+                    value={selectedAuthor}
+                    onChange={(e) => setSelectedAuthor(e.target.value)}
+                    className="selectAuthor"
+                  >
+                    <option value="">-- Select Agent --</option>
+                    {agents?.map((agent) => (
+                      <option key={agent._id} value={agent._id}>
+                        {agent.name}
+                      </option>
+                    ))}
+                  </select>
+                </label>
 
                 <input
                   type="text"

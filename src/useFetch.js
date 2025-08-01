@@ -10,9 +10,15 @@ export default function useFetch(url, initialData) {
     fetch(url)
       .then((res) => res.json())
       .then((data) => {
-        setData(data);
+        if (data.error) {
+          setError(data.error);
+        } else {
+          setData(data);
+        }
       })
-      .catch((error) => setError(error.message))
+      .catch((error) => {
+        setError(error.message);
+      })
       .finally(() => setLoading(false));
   };
 

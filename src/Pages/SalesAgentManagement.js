@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import NavBar from "../Components/Navbar";
 import SideBar from "../Components/Sidebar";
 import Loader from "../Components/Loader";
@@ -18,11 +19,15 @@ function SalesAgentManagement(props) {
           method: "DELETE",
         }
       );
-      if (response) {
+
+      if (response.ok) {
+        toast.success("Agent deleted successfully");
         fetchAllAgents();
+      } else {
+        toast.error("Failed to delete agent");
       }
     } catch (error) {
-      alert("Something went wrong. Please try again.");
+      toast.error("Something went wrong. Please try again.");
     }
   }
 

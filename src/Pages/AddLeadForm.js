@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { toast } from "react-toastify";
 import NavBar from "../Components/Navbar";
 import SideBar from "../Components/Sidebar";
 import useLeadsContext from "../Context/useContext";
-import "../CSS/AddLeadForm.css";
-import { useNavigate, useParams } from "react-router-dom";
 import { LEAD_STATUS, PRIORITIES, TAGS_LIST } from "../Common/helper";
+import "../CSS/AddLeadForm.css";
 
 export default function AddLeadForm(props) {
   const { agents, fetchAllLeads, leads } = useLeadsContext();
@@ -87,12 +88,23 @@ export default function AddLeadForm(props) {
         "Content-Type": "application/json",
       },
     })
-      .then((res) => res.json())
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error("Failed to submit lead");
+        }
+        return res.json();
+      })
       .then(() => {
+        toast.success(
+          isEdit ? "Lead updated successfully!" : "New lead added!"
+        );
         fetchAllLeads();
         navigate("/leadlist");
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log(err);
+        toast.error("Something went wrong while submitting the lead.");
+      });
   }
 
   return (
