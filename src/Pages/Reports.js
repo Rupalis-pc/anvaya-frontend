@@ -7,13 +7,11 @@ import {
   CategoryScale,
   LinearScale,
 } from "chart.js";
-
-import NavBar from "../Components/Navbar";
-import SideBar from "../Components/Sidebar";
 import PieChartComponent from "./PieChartComponent";
-import "../CSS/reports.css";
 import LeadsByStatusChart from "./LeadsByStatusChart";
 import SalesAgentPieChart from "./SalesAgentPieChart";
+import DashboardLayout from "../Components/DashboardLayout";
+import "../CSS/reports.css";
 
 ChartJS.register(
   ArcElement,
@@ -26,16 +24,12 @@ ChartJS.register(
 
 export default function Reports() {
   return (
-    <div>
-      <NavBar title="Anvaya CRM Reports" />
-      <div className="main">
-        <SideBar showOnlyBackButton={true} />
-        <div className="reportsSection">
-          <PieChartComponent />
-          <SalesAgentPieChart />
-          <LeadsByStatusChart />
-        </div>
+    <DashboardLayout title="Anvaya CRM Reports" showOnlyBackButton={true}>
+      <div className="reportsSection">
+        <PieChartComponent />
+        <SalesAgentPieChart />
+        <LeadsByStatusChart />
       </div>
-    </div>
+    </DashboardLayout>
   );
 }

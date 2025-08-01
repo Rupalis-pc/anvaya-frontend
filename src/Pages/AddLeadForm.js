@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
-import NavBar from "../Components/Navbar";
-import SideBar from "../Components/Sidebar";
+import DashboardLayout from "../Components/DashboardLayout";
 import useLeadsContext from "../Context/useContext";
 import {
   API_ENDPOINT,
@@ -113,126 +112,120 @@ export default function AddLeadForm(props) {
   }
 
   return (
-    <div>
-      <NavBar title="Anvaya CRM Dashboard" />
-      <main className="main">
-        <SideBar showOnlyBackButton={true} />
-        <div className="content">
-          <div className="addLeadContainer">
-            <h2>{isEdit ? "Update Lead" : "Add New Lead"}</h2>
-            <form className="addLeadForm" onSubmit={submitHandler}>
-              <label>
-                Lead Name:
-                <input
-                  type="text"
-                  name="leadName"
-                  required
-                  value={formData.leadName}
-                  onChange={handleChange}
-                />
-              </label>
+    <DashboardLayout title="Anvaya CRM Dashboard" showOnlyBackButton={true}>
+      <div className="addLeadContainer">
+        <h2>{isEdit ? "Update Lead" : "Add New Lead"}</h2>
+        <form className="addLeadForm" onSubmit={submitHandler}>
+          <label>
+            Lead Name:
+            <input
+              type="text"
+              name="leadName"
+              required
+              value={formData.leadName}
+              onChange={handleChange}
+            />
+          </label>
 
-              <label>
-                Lead Source:
-                <select
-                  name="leadSource"
-                  value={formData.leadSource}
-                  required
-                  onChange={handleChange}
-                >
-                  <option value="">Select Source</option>
-                  {leadSources.map((source) => (
-                    <option key={source} value={source}>
-                      {source}
-                    </option>
-                  ))}
-                </select>
-              </label>
+          <label>
+            Lead Source:
+            <select
+              name="leadSource"
+              value={formData.leadSource}
+              required
+              onChange={handleChange}
+            >
+              <option value="">Select Source</option>
+              {leadSources.map((source) => (
+                <option key={source} value={source}>
+                  {source}
+                </option>
+              ))}
+            </select>
+          </label>
 
-              <label>
-                Sales Agent:
-                <select
-                  name="salesAgent"
-                  value={formData.salesAgent}
-                  required
-                  onChange={handleChange}
-                >
-                  <option value="">Select Agent</option>
-                  {agents.map((agent) => (
-                    <option key={agent._id} value={agent._id}>
-                      {agent.name}
-                    </option>
-                  ))}
-                </select>
-              </label>
+          <label>
+            Sales Agent:
+            <select
+              name="salesAgent"
+              value={formData.salesAgent}
+              required
+              onChange={handleChange}
+            >
+              <option value="">Select Agent</option>
+              {agents.map((agent) => (
+                <option key={agent._id} value={agent._id}>
+                  {agent.name}
+                </option>
+              ))}
+            </select>
+          </label>
 
-              <label>
-                Lead Status:
-                <select
-                  name="leadStatus"
-                  value={formData.leadStatus}
-                  onChange={handleChange}
-                >
-                  <option value="">Select Status</option>
-                  {LEAD_STATUS.map((status) => (
-                    <option key={status} value={status}>
-                      {status}
-                    </option>
-                  ))}
-                </select>
-              </label>
+          <label>
+            Lead Status:
+            <select
+              name="leadStatus"
+              value={formData.leadStatus}
+              onChange={handleChange}
+            >
+              <option value="">Select Status</option>
+              {LEAD_STATUS.map((status) => (
+                <option key={status} value={status}>
+                  {status}
+                </option>
+              ))}
+            </select>
+          </label>
 
-              <label>
-                Priority:
-                <select
-                  name="priority"
-                  value={formData.priority}
-                  onChange={handleChange}
-                >
-                  {PRIORITIES.map((priority) => (
-                    <option key={priority} value={priority}>
-                      {priority}
-                    </option>
-                  ))}
-                </select>
-              </label>
+          <label>
+            Priority:
+            <select
+              name="priority"
+              value={formData.priority}
+              onChange={handleChange}
+            >
+              {PRIORITIES.map((priority) => (
+                <option key={priority} value={priority}>
+                  {priority}
+                </option>
+              ))}
+            </select>
+          </label>
 
-              <label>
-                Time to Close (Days):
-                <input
-                  type="number"
-                  name="timeToClose"
-                  value={formData.timeToClose}
-                  required
-                  onChange={handleChange}
-                />
-              </label>
+          <label>
+            Time to Close (Days):
+            <input
+              type="number"
+              name="timeToClose"
+              value={formData.timeToClose}
+              required
+              onChange={handleChange}
+            />
+          </label>
 
-              <label>
-                Tags:
-                <div className="checkboxGroup">
-                  {TAGS_LIST.map((tag) => (
-                    <label key={tag} className="checkboxItem">
-                      <input
-                        type="checkbox"
-                        name="tags"
-                        value={tag}
-                        checked={formData.tags.includes(tag)}
-                        onChange={checkboxHandler}
-                      />
-                      {tag}
-                    </label>
-                  ))}
-                </div>
-              </label>
+          <label>
+            Tags:
+            <div className="checkboxGroup">
+              {TAGS_LIST.map((tag) => (
+                <label key={tag} className="checkboxItem">
+                  <input
+                    type="checkbox"
+                    name="tags"
+                    value={tag}
+                    checked={formData.tags.includes(tag)}
+                    onChange={checkboxHandler}
+                  />
+                  {tag}
+                </label>
+              ))}
+            </div>
+          </label>
 
-              <button type="submit" className="createLeadBtn">
-                {isEdit ? "Update Lead" : "Create Lead"}
-              </button>
-            </form>
-          </div>
-        </div>
-      </main>
-    </div>
+          <button type="submit" className="createLeadBtn">
+            {isEdit ? "Update Lead" : "Create Lead"}
+          </button>
+        </form>
+      </div>
+    </DashboardLayout>
   );
 }

@@ -2,16 +2,6 @@
     --primary-color: rgb(55, 99, 180);
 }
 
-.sidebar ul {
-    list-style: none;
-    color: white;
-    margin: 1rem 0;
-}
-
-.sidebar ul li {
-    padding: 1rem 0;
-}
-
 .lead-list {
     display: flex;
     gap: 10px;

@@ -1,11 +1,10 @@
 import { useEffect, useState } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
-import "../CSS/Dashboard.css";
-import NavBar from "../Components/Navbar";
-import SideBar from "../Components/Sidebar";
+import { useNavigate, useParams } from "react-router-dom";
+import DashboardLayout from "../Components/DashboardLayout";
 import useLeadsContext from "../Context/useContext";
-import "../CSS/LeadsByStatus.css";
 import { PRIORITIES } from "../Common/helper";
+import "../CSS/Dashboard.css";
+import "../CSS/LeadsByStatus.css";
 
 export default function LeadsByStatus() {
   const { status } = useParams();
@@ -52,11 +51,11 @@ export default function LeadsByStatus() {
   }, [leads, leadsLoading, status, agent, priority, timeToClose, agents]);
 
   return (
-    <div>
-      <NavBar title="Lead List by Status" />
-      <main className="main">
-        <SideBar showOnlyBackButton={true} />
-        <div className="content">
+        <DashboardLayout
+          title="Lead List by Status"
+          showOnlyBackButton={true}
+        >
+        <>
           <section className="card">
             <h3>Status: {status}</h3>
             <div className="lead-list">
@@ -149,8 +148,7 @@ export default function LeadsByStatus() {
               Add New Lead
             </button>
           </section>
-        </div>
-      </main>
-    </div>
+      </>
+    </DashboardLayout>
   );
 }

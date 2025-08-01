@@ -6,6 +6,7 @@ import SideBar from "../Components/Sidebar";
 import useLeadsContext from "../Context/useContext";
 import "../CSS/LeadList.css";
 import { API_ENDPOINT } from "../Common/helper";
+import DashboardLayout from "../Components/DashboardLayout";
 
 export default function LeadList(props) {
   const { leads, leadsLoading, agents, fetchAllLeads } = useLeadsContext();
@@ -70,117 +71,117 @@ export default function LeadList(props) {
 
   const filteredLeads = filter();
 
-  return (
-    <div>
-      {!hideNavAndSideBar && <NavBar title="Lead List" />}
-      <main className="main">
-        {!hideNavAndSideBar && <SideBar showOnlyBackButton={true} />}
-        <div className="content">
-          <section className="card">
-            <h3>Lead Overview</h3>
-            {filteredLeads.map((lead, index) => (
-              <div className="leadCard" key={index}>
-                <div className="leadHeader">
-                  <span className="leadName">{lead.name}</span>
-                  {props.showDeleteBtn ? (
-                    <button
-                      className="deleteBtn"
-                      onClick={() => deleteLead(lead._id)}
-                    >
-                      Delete
-                    </button>
-                  ) : (
-                    <span
-                      className={`statusTag ${lead.status
-                        .toLowerCase()
-                        .replace(/\s+/g, "-")}`}
-                    >
-                      {lead.status}
-                    </span>
-                  )}
-                </div>
-                <div className="details">
-                  <p>
-                    <strong>Sales Agent:</strong>{" "}
-                    {
-                      agents.find(
-                        (agentObj) => agentObj._id === lead.salesAgent
-                      )?.name
-                    }
-                  </p>
-                  <p>
-                    <strong>Source:</strong> {lead.source}
-                  </p>
-                </div>
-              </div>
-            ))}
-          </section>
-          <section className="card">
-            {/* Filters */}
-            <p className="sectionTitle">Filters:</p>
-            <div className="filtersSection">
-              <div className="filterItem">
-                <label htmlFor="status">Status:</label>
-                <select
-                  id="status"
-                  className="filterSelect"
-                  onChange={(e) => setStatus(e.target.value)}
+  const contentUI = (
+    <>
+      <section className="card">
+        <h3>Lead Overview</h3>
+        {filteredLeads.map((lead, index) => (
+          <div className="leadCard" key={index}>
+            <div className="leadHeader">
+              <span className="leadName">{lead.name}</span>
+              {props.showDeleteBtn ? (
+                <button
+                  className="deleteBtn"
+                  onClick={() => deleteLead(lead._id)}
                 >
-                  {statusOptions.map((status) => (
-                    <option key={status} value={status}>
-                      {status}
-                    </option>
-                  ))}
-                </select>
-              </div>
-              <div className="filterItem">
-                <label htmlFor="agent">Sales Agent:</label>
-                <select
-                  id="agent"
-                  className="filterSelect"
-                  onChange={(e) => setAgent(e.target.value)}
+                  Delete
+                </button>
+              ) : (
+                <span
+                  className={`statusTag ${lead.status
+                    .toLowerCase()
+                    .replace(/\s+/g, "-")}`}
                 >
-                  <option>All</option>
-                  {agents.map((agent) => (
-                    <option key={agent._id} value={agent.name}>
-                      {agent.name}
-                    </option>
-                  ))}
-                </select>
-              </div>
+                  {lead.status}
+                </span>
+              )}
             </div>
+            <div className="details">
+              <p>
+                <strong>Sales Agent:</strong>{" "}
+                {
+                  agents.find((agentObj) => agentObj._id === lead.salesAgent)
+                    ?.name
+                }
+              </p>
+              <p>
+                <strong>Source:</strong> {lead.source}
+              </p>
+            </div>
+          </div>
+        ))}
+      </section>
 
-            {/* Sort */}
-            <div className="sortSection">
-              <p className="sortTitle">Sort By:</p>
-              <div className="sortButtons">
-                <button
-                  className="sortBtn"
-                  onClick={() => {
-                    setPriority(true);
-                    setTimeToClose(false);
-                  }}
-                >
-                  Priority
-                </button>
-                <button
-                  className="sortBtn"
-                  onClick={() => {
-                    setTimeToClose(true);
-                    setPriority(false);
-                  }}
-                >
-                  Time to Close
-                </button>
-              </div>
-            </div>
-            {/* Add Lead Button */}
-            <button className="addBtn" onClick={() => navigate("/leadForm")}>
-              Add New Lead
-            </button>
-          </section>
+      <section className="card">
+        <p className="sectionTitle">Filters:</p>
+        <div className="filtersSection">
+          <div className="filterItem">
+            <label htmlFor="status">Status:</label>
+            <select
+              id="status"
+              className="filterSelect"
+              onChange={(e) => setStatus(e.target.value)}
+            >
+              {statusOptions.map((status) => (
+                <option key={status} value={status}>
+                  {status}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div className="filterItem">
+            <label htmlFor="agent">Sales Agent:</label>
+            <select
+              id="agent"
+              className="filterSelect"
+              onChange={(e) => setAgent(e.target.value)}
+            >
+              <option>All</option>
+              {agents.map((agent) => (
+                <option key={agent._id} value={agent.name}>
+                  {agent.name}
+                </option>
+              ))}
+            </select>
+          </div>
         </div>
-      </main>
-    </div>
+
+        <div className="sortSection">
+          <p className="sortTitle">Sort By:</p>
+          <div className="sortButtons">
+            <button
+              className="sortBtn"
+              onClick={() => {
+                setPriority(true);
+                setTimeToClose(false);
+              }}
+            >
+              Priority
+            </button>
+            <button
+              className="sortBtn"
+              onClick={() => {
+                setTimeToClose(true);
+                setPriority(false);
+              }}
+            >
+              Time to Close
+            </button>
+          </div>
+        </div>
+
+        <button className="addBtn" onClick={() => navigate("/leadForm")}>
+          Add New Lead
+        </button>
+      </section>
+    </>
+  );
+
+  return hideNavAndSideBar ? (
+    <div className="content">{contentUI}</div>
+  ) : (
+    <DashboardLayout title="Anvaya CRM Dashboard" showOnlyBackButton={true}>
+      {contentUI}
+    </DashboardLayout>
   );
 }

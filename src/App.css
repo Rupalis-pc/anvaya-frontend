@@ -10,41 +10,9 @@ header h2 {
     padding: 1rem;
 }
 
-.main {
-    display: flex;
-    min-height: 90vh;
-}
-
-.sidebar {
-    width: 300px;
-    background-color: var(--primary-color);
-}
-
-.sidebar a {
-    text-decoration: none;
-    color: white;
-}
-
-.content {
-    flex: 1;
-    padding: 2rem 2rem;
-    background-color: rgb(244, 242, 242);
-}
-
 .card {
     background-color: white;
     padding: 15px;
     border-radius: 6px;
     margin-bottom: 15px;
-}
-
-.backBtn {
-    display: inline-block;
-    background-color: var(--primary-color);
-    color: white;
-    text-decoration: none;
-    cursor: pointer;
-    padding: 0.5rem 0;
-    padding-inline-start: 24px;
-    margin: 1rem;
 }

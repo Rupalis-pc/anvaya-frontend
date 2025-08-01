@@ -1,13 +1,12 @@
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
-import SideBar from "../Components/Sidebar";
 import useLeadsContext from "../Context/useContext";
 import "../CSS/LeadDetail.css";
 import useFetch from "../useFetch";
 import { useNavigate, useParams } from "react-router-dom";
 import Loader from "../Components/Loader";
-import NavBar from "../Components/Navbar";
 import { API_ENDPOINT } from "../Common/helper";
+import DashboardLayout from "../Components/DashboardLayout";
 
 export default function LeadManagement() {
   const { id } = useParams();
@@ -64,112 +63,107 @@ export default function LeadManagement() {
   }
 
   return (
-    <div>
-      <NavBar
-        title={`Lead Management ${leadData?.name ? `: ${leadData?.name}` : ""}`}
-      />
-      <main className="main">
-        <div className="sidebar">
-          <SideBar showOnlyBackButton={true} />
-        </div>
-        <div className="leadDetails">
-          {leadsLoading ? (
-            <Loader />
-          ) : (
-            <>
-              <section className="card">
-                <h3>Lead Details</h3>
-                {leadData ? (
-                  <>
-                    <p>
-                      Lead Name: <span>{leadData?.name}</span>
-                    </p>
-                    <p>
-                      Sales Agent:{" "}
-                      <span>
-                        {agents?.find(
-                          (agent) => agent._id === leadData.salesAgent
-                        )?.name || ""}
-                      </span>
-                    </p>
-                    <p>
-                      Lead Source: <span>{leadData?.source}</span>
-                    </p>
-                    <p>
-                      Lead Status: <span>{leadData?.status}</span>
-                    </p>
-                    <p>
-                      Priority: <span>{leadData?.priority}</span>
-                    </p>
-                    <p>
-                      Time to Close: <span>{leadData?.timeToClose} days</span>
-                    </p>
-                    <p>
-                      Tags: <span>{leadData?.tags.join(", ")}</span>
-                    </p>
+    <DashboardLayout
+      title={`Lead Management ${leadData?.name ? `: ${leadData?.name}` : ""}`}
+      showOnlyBackButton={true}
+    >
+      <div className="leadDetails">
+        {leadsLoading ? (
+          <Loader />
+        ) : (
+          <>
+            <section className="card">
+              <h3>Lead Details</h3>
+              {leadData ? (
+                <>
+                  <p>
+                    Lead Name: <span>{leadData?.name}</span>
+                  </p>
+                  <p>
+                    Sales Agent:{" "}
+                    <span>
+                      {agents?.find(
+                        (agent) => agent._id === leadData.salesAgent
+                      )?.name || ""}
+                    </span>
+                  </p>
+                  <p>
+                    Lead Source: <span>{leadData?.source}</span>
+                  </p>
+                  <p>
+                    Lead Status: <span>{leadData?.status}</span>
+                  </p>
+                  <p>
+                    Priority: <span>{leadData?.priority}</span>
+                  </p>
+                  <p>
+                    Time to Close: <span>{leadData?.timeToClose} days</span>
+                  </p>
+                  <p>
+                    Tags: <span>{leadData?.tags.join(", ")}</span>
+                  </p>
 
-                    <button
-                      className="editBtn"
-                      onClick={() => navigate(`/lead/edit/${leadData._id}`)}
-                    >
-                      Edit Lead Details
-                    </button>
-                  </>
-                ) : (
-                  <div>No Lead Data Found</div>
-                )}
-              </section>
-
-              <section className="card">
-                <h3>Comments Section</h3>
-                {loading && <Loader />}
-                {data?.map((ele) => (
-                  <div>
-                    <p>
-                      Author:{" "}
-                      {agents?.find((agent) => agent._id === ele.author)
-                        ?.name || ""}
-                    </p>
-                    <p>Comment: {ele.commentText}</p>
-                  </div>
-                ))}
-                <br />
-                <hr />
-                <label>
-                  Select Author:
-                  <select
-                    value={selectedAuthor}
-                    onChange={(e) => setSelectedAuthor(e.target.value)}
-                    className="selectAuthor"
+                  <button
+                    className="editBtn"
+                    onClick={() => navigate(`/lead/edit/${leadData._id}`)}
                   >
-                    <option value="">-- Select Agent --</option>
-                    {agents?.map((agent) => (
-                      <option key={agent._id} value={agent._id}>
-                        {agent.name}
-                      </option>
-                    ))}
-                  </select>
-                </label>
+                    Edit Lead Details
+                  </button>
+                </>
+              ) : (
+                <div>No Lead Data Found</div>
+              )}
+            </section>
 
-                <input
-                  type="text"
-                  className="addnewComment"
-                  placeholder="Add New Comment...."
-                  value={commentText}
-                  onChange={(e) => setCommentText(e.target.value)}
-                />
-                <button
-                  type="button"
-                  className="submitBtn"
-                  onClick={handleSubmitComment}
+            <section className="card">
+              <h3>Comments Section</h3>
+              {loading && <Loader />}
+              {data?.map((ele) => (
+                <div>
+                  <p>
+                    Author:{" "}
+                    {agents?.find((agent) => agent._id === ele.author)?.name ||
+                      ""}
+                  </p>
+                  <p>Comment: {ele.commentText}</p>
+                </div>
+              ))}
+              <br />
+              <hr />
+              <label>
+                Select Author:
+                <select
+                  value={selectedAuthor}
+                  onChange={(e) => setSelectedAuthor(e.target.value)}
+                  className="selectAuthor"
                 >
-                  Submit Comment
-                </button>
-              </section>
-            </>
-          )}
-        </div>
-      </main>
-    </div>
+                  <option value="">-- Select Agent --</option>
+                  {agents?.map((agent) => (
+                    <option key={agent._id} value={agent._id}>
+                      {agent.name}
+                    </option>
+                  ))}
+                </select>
+              </label>
+
+              <input
+                type="text"
+                className="addnewComment"
+                placeholder="Add New Comment...."
+                value={commentText}
+                onChange={(e) => setCommentText(e.target.value)}
+              />
+              <button
+                type="button"
+                className="submitBtn"
+                onClick={handleSubmitComment}
+              >
+                Submit Comment
+              </button>
+            </section>
+          </>
+        )}
+      </div>
+    </DashboardLayout>
   );
 }
