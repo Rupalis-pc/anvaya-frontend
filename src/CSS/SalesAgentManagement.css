@@ -13,7 +13,6 @@
 .agentCard {
     display: flex;
     align-items: center;
-    background-color: #fff;
     padding: 1rem;
     margin-bottom: 1rem;
     border-radius: 8px;
@@ -23,7 +22,6 @@
 .agentIndex {
     font-weight: bold;
     margin-right: 1rem;
-    color: #555;
 }
 
 .agentDetails {
@@ -34,26 +32,42 @@
 .agentName {
     font-size: 1.1rem;
     font-weight: 600;
-    color: #2c3e50;
 }
 
 .agentEmail {
     font-size: 0.95rem;
-    color: #555;
 }
 
 .addBtn {
-    margin-top: 1.5rem;
-    padding: 0.75rem 1.5rem;
-    background-color: #007bff;
-    border: none;
+    background-color: rgb(5, 165, 5);
     color: white;
-    border-radius: 6px;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
     cursor: pointer;
-    font-size: 1rem;
-    transition: background-color 0.2s;
 }
 
 .addBtn:hover {
-    background-color: #0056b3;
+    background-color: green;
+}
+
+.agentActions {
+    margin-left: auto;
+    /* pushes it to the right */
+    display: flex;
+    align-items: center;
+}
+
+.deleteBtn {
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    color: #d11a2a;
+    padding: 5px;
+}
+
+.deleteBtn:hover {
+    color: #a00;
 }

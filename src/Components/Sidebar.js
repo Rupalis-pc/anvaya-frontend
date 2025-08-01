@@ -27,7 +27,7 @@ function SideBar(props) {
           <Link to="/reports">→ Reports</Link>
         </li>
         <li>
-          <Link to="/leadlist">→ Settings</Link>
+          <Link to="/settings">→ Settings</Link>
         </li>
       </ul>
     </div>

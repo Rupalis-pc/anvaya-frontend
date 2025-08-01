@@ -1,0 +1,33 @@
+.status-card-container {
+    padding: 2rem;
+}
+
+.status-heading {
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+}
+
+.lead-card-main {
+    width: 100%;
+}
+
+.lead-card {
+    background-color: white;
+    border-radius: 8px;
+    padding: 1rem 1.5rem;
+    border: 1px solid lightgray;
+    margin-bottom: 1rem;
+
+}
+
+.lead-name {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    margin-top: 0;
+}
+
+.lead-card p {
+    margin: 0.4rem 0;
+    font-size: 0.95rem;
+}

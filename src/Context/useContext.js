@@ -51,6 +51,7 @@ export function LeadsProvider({ children }) {
         agentsLoading,
         agents,
         fetchAllAgents,
+        fetchAllLeads,
       }}
     >
       {children}

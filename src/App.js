@@ -9,6 +9,7 @@ import Reports from "./Pages/Reports.js";
 import { LeadsProvider } from "./Context/useContext.js";
 import LeadManagement from "./Pages/LeadManagement.js";
 import LeadsByStatus from "./Pages/LeadsByStatus.js";
+import Settings from "./Pages/Settings.js";
 
 export default function App() {
   return (
@@ -23,9 +24,10 @@ export default function App() {
           <Route path="/salesAgentForm" element={<AddSalesAgent />} />
           <Route
             path="/salesAgentManagement"
-            element={<SalesAgentManagement />}
+            element={<SalesAgentManagement showDeleteBtn={false} />}
           />
           <Route path="/reports" element={<Reports />} />
+          <Route path="/settings" element={<Settings />} />
         </Routes>
       </Router>
     </LeadsProvider>

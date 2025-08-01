@@ -1,14 +1,132 @@
-.sort {
-    display: flex;
-    gap: 10px;
-    margin: 1rem;
+.card h3 {
+    margin-bottom: 1rem;
+    font-size: 1.4rem;
+    color: #333;
 }
 
-.sort button {
-    padding: 6px 12px;
-    margin: 5px;
+.leadCard {
+    padding: 1rem 1.5rem;
+    border-radius: 8px;
+    margin-bottom: 1rem;
     border: 1px solid lightgray;
+}
+
+.leadHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.leadName {
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.statusTag {
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 0.85rem;
+    color: white;
+    background-color: orange;
+    font-weight: 500;
+}
+
+.statusTag.new {
+    background-color: var(--primary-color);
+}
+
+.statusTag.qualified {
+    background-color: green;
+}
+
+.statusTag.closed {
+    background-color: red;
+}
+
+.statusTag.proposal-sent {
+    background-color: palevioletred;
+}
+
+.details {
+    margin-top: 0.5rem;
+    font-size: 0.95rem;
+}
+
+.sortSection {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     background-color: #e1ecf7;
+    flex-wrap: wrap;
+    margin-top: 1.5rem;
+    margin-bottom: 1rem;
+    padding: 0.5rem;
+    border-radius: 5px;
+}
+
+.sortTitle {
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.sortButtons {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.sortBtn {
+    padding: 8px 16px;
+    background-color: #e1ecf7;
+    border: 1px solid var(--primary-color);
+    border-radius: 6px;
+    font-weight: 500;
     cursor: pointer;
-    border-radius: 4px;
+}
+
+.sortBtn:hover {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.sectionTitle {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: #333;
+}
+
+.filtersSection {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    background-color: #e1ecf7;
+    padding: 0.75rem 1rem;
+    border-radius: 6px;
+    margin-bottom: 1rem;
+}
+
+.filterItem {
+    display: flex;
+    flex-direction: column;
+    font-size: 0.95rem;
+}
+
+.filterItem label {
+    font-weight: 500;
+    margin-bottom: 4px;
+}
+
+.filterSelect {
+    padding: 4px 8px;
+    border: 1px solid var(--primary-color);
+    border-radius: 5px;
+    font-size: 0.95rem;
+    background-color: #e1ecf7;
+    min-width: 150px;
+}
+
+.filterSelect:focus {
+    border-color: var(--primary-color);
+    outline: none;
 }
