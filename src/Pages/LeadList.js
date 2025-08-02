@@ -178,7 +178,7 @@ export default function LeadList(props) {
   );
 
   return hideNavAndSideBar ? (
-    <div className="content">{contentUI}</div>
+    <div>{contentUI}</div>
   ) : (
     <DashboardLayout title="Anvaya CRM Dashboard" showOnlyBackButton={true}>
       {contentUI}

@@ -38,7 +38,7 @@ export default function PieChartComponent() {
   };
 
   return (
-    <div style={{ width: "400px" }}>
+    <div className="chartCard">
       <h2>Total Leads Closed and in Pipeline</h2>
       <Pie data={pieData} options={pieOptions} />
     </div>

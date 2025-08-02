@@ -1,14 +1,18 @@
-/* src/CSS/reports.css */
-
 .reportsSection {
-    flex: 1;
-    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 2rem;
-    padding: 2rem;
+    padding: 1rem;
     justify-items: center;
 }
 
 h2 {
     text-align: center;
     margin-bottom: 1rem;
+}
+
+/* Optional: make charts responsive */
+.reportsSection>div {
+    width: 100%;
+    max-width: 500px;
 }

@@ -35,7 +35,7 @@ export default function LeadsByStatusChart() {
   };
 
   return (
-    <div style={{ width: "600px", margin: "2rem auto" }}>
+    <div className="chartCard">
       <h2>Lead Status Distribution</h2>
       <Bar data={barData} options={barOptions} />
     </div>

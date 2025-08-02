@@ -60,7 +60,7 @@ function SalesAgentManagement(props) {
   );
 
   return hideNavAndSideBar ? (
-    <div className="content">{contentUI}</div>
+    <div>{contentUI}</div>
   ) : (
     <DashboardLayout title="Sales Agent Management" showOnlyBackButton={true}>
       {contentUI}

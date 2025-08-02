@@ -55,7 +55,7 @@ export default function SalesAgentPieChart() {
   };
 
   return (
-    <div style={{ width: "500px", margin: "2rem auto" }}>
+    <div className="chartCard">
       <h2>Lead Closed by Sales Agent</h2>
       <Pie data={chartData} options={options} />
     </div>
