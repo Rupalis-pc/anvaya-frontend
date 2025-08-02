@@ -1,70 +1,106 @@
-# Getting Started with Create React App
+# Anvaya CRM
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Anvaya CRM is a full-stack customer relationship management system built to help sales teams manage leads, assign agents, track interactions, and monitor conversions efficiently.
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+## Demo Link
 
-### `npm start`
+[Live Demo](https://anvaya-frontend-steel.vercel.app)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+---
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Quick Start
 
-### `npm test`
+```
+git clone https://github.com/Rupalis-pc/anvaya-frontend.git
+cd anvaya-frontend
+npm install
+npm start
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## 🔧 Tech Stack
 
-### `npm run build`
+### Frontend:
+- **React.js** with Hooks
+- **React Router** for navigation
+- **Context API** for state management
+- **Chart.js** for data visualization
+- **CSS / Flex Box**
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Backend:
+- **Node.js** with Express.js
+- **MongoDB** with Mongoose
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+---
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## ✨ Features
 
-### `npm run eject`
+### Dashboard
+- Displays leads and their current status
+- Shows the number of leads in each status category  
+- Sidebar navigation: Leads, Sales, Agents, Reports, Settings
+- Quick filters by lead status
+- "Add New Lead" button opens form
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### Lead Management
+- View individual lead information
+- Edit lead details
+- Comments with author and timestamps
+- Add comments to track communication history
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Lead List
+- View all leads 
+- Filtering / Sorting options
+- "Add New Lead" button opens form
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### Sales Agent Management
+- View all Sales Agents 
+- "Add New Agent" button opens form
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### Reports
+- Leads Closed vs In Pipeline (Pie Chart)
+- Leads closed per agent (Pie Chart)
+- Leads by status chart (Bar Chart)
 
-## Learn More
+### Settings
+- Manage List of Leads
+- Manage list of sales agents
+- Option to Add and Delete 
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Demo Video
+Watch a walkthrough (5 minutes) of all major features of this app:
+[Loom Video Link](https://www.loom.com/share/0c8f73f652914a409d5b14d40260af94?sid=eeb51af2-94ff-4700-accd-ec38f1e7e623)
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+---
 
-### Code Splitting
+## 🛠️ API Endpoints
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### Leads
+- `GET /leads` - Get all leads
+- `POST /leads` - Create a lead
+- `GET /leads/:id` - Get lead details
+- `PUT /leads/:id` - Update lead
+- `DELETE /leads/:id` - Delete lead
 
-### Analyzing the Bundle Size
+### Comments
+- `GET /leads/:id/comments` - Get comments for a lead
+- `POST /leads/:id/comments` - Add comment to a lead
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+### Sales Agents
+- `GET /agents` - List agents
+- `POST /agents` - Add new agent
 
-### Making a Progressive Web App
+### Reports
+- `GET /report/last-week` - Leads closed last week
+- `GET /report/pipeline` - All leads except closed
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+---
 
-### Advanced Configuration
+## Contact
+For bugs or feature requests, please reach out to rupalisethiaa@gmail.com
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+---
 
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## 👩‍💻 Author
+**Rupali Sethia**  

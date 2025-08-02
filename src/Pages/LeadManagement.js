@@ -119,19 +119,32 @@ export default function LeadManagement() {
               <h3>Comments Section</h3>
               {loading && <Loader />}
               {data?.map((ele) => (
-                <div>
-                  <p>
-                    Author:{" "}
-                    {agents?.find((agent) => agent._id === ele.author)?.name ||
-                      ""}
-                  </p>
-                  <p>Comment: {ele.commentText}</p>
-                </div>
+                <>
+                  <div>
+                    <p>
+                      Author:{" "}
+                      {agents?.find((agent) => agent._id === ele.author)
+                        ?.name || ""}
+                    </p>
+                    <p style={{ fontSize: "0.90rem" }}>
+                      Comment: {ele.commentText}
+                    </p>
+                    <small>
+                      Posted on:{" "}
+                      {new Date(ele.createdAt).toLocaleDateString("en-IN", {
+                        day: "numeric",
+                        month: "long",
+                        year: "numeric",
+                      })}
+                    </small>
+                  </div>
+                  <br />
+                </>
               ))}
-              <br />
+
               <hr />
               <label>
-                Select Author:
+                Select Author:{" "}
                 <select
                   value={selectedAuthor}
                   onChange={(e) => setSelectedAuthor(e.target.value)}

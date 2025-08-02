@@ -1,15 +1,13 @@
 import { useState } from "react";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
-import NavBar from "../Components/Navbar";
-import SideBar from "../Components/Sidebar";
 import useLeadsContext from "../Context/useContext";
 import "../CSS/LeadList.css";
 import { API_ENDPOINT } from "../Common/helper";
 import DashboardLayout from "../Components/DashboardLayout";
 
 export default function LeadList(props) {
-  const { leads, leadsLoading, agents, fetchAllLeads } = useLeadsContext();
+  const { leads, agents, fetchAllLeads } = useLeadsContext();
   const navigate = useNavigate();
   const [status, setStatus] = useState("All");
   const [agent, setAgent] = useState("All");
@@ -180,7 +178,7 @@ export default function LeadList(props) {
   return hideNavAndSideBar ? (
     <div>{contentUI}</div>
   ) : (
-    <DashboardLayout title="Anvaya CRM Dashboard" showOnlyBackButton={true}>
+    <DashboardLayout title="Lead List" showOnlyBackButton={true}>
       {contentUI}
     </DashboardLayout>
   );
